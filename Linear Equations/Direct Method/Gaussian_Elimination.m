@@ -1,11 +1,12 @@
+function X = Gaussian_Elimination(A, b)
 format long
 % Print numbers as long as possible
 
-A = input('Please type in the matrix A you want to solve:\n');
-b = input('Please type in the vector b that your equations results in:\n');
+% A = input('Please type in the matrix A you want to solve:\n');
+% b = input('Please type in the vector b that your equations results in:\n');
 
 [row1, col1] = size(A);
-[row2, col2] = size(b);
+[row2, ~] = size(b);
 
 if row1 ~= col1
     'The matrix you input is not a square one.'
@@ -15,42 +16,27 @@ elseif row1 ~= row2
     return;
 end
 
-tic % start timing
+% tic % start timing
 
 C = [A, b];
 % Startup Gaussian Elimination
 
 for index =  1 : row1-1
-    % Find the Maximum Column Pivot
-    pivotElement = C(index, index);
-    targetRow = index;
-    for current = index + 1 : row1
-        if abs(pivotElement) < abs(C(current, index))
-            targetRow = current;
-            pivotElement = C(current, index);
-        end
-    end
-
-    % Swap
-    tempRow = C(index, :);
-    C(index, :) = C(targetRow, :);
-    C(targetRow, :) = tempRow;
-
-    % Get current Row and the pivot element
     currentRow = C(index,:);
     pivotElement = C(index, index);
-   
-    % Exit if pivot element is zero
+    % Get current Row and the pivot element
+    
     if pivotElement == 0
-        'There is still a zero pivot element!'
+        'There is a zero pivot element!'
         return;
     end
+    % Exit if pivot element is zero
 
-    % Elimination
     for current = index + 1 : row1
         m = C(current, index) / pivotElement;
         C(current,:) = C(current,:) - currentRow * m;
     end
+    % Elimination
 end
 
 'The lower triangular matrix is:'
@@ -69,4 +55,4 @@ end
 
 'The result vector X is:'
 X
-toc % end timing
+% toc % end timing
