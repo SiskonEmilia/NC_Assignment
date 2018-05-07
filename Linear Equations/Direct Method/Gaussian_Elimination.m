@@ -39,9 +39,6 @@ for index =  1 : row1-1
     % Elimination
 end
 
-'The lower triangular matrix is:'
-C
-
 % Back substitution process
 X = ones(col1, 1);
 X(col1, 1) = C(row1, col1 + 1) / C(row1, row1);
@@ -53,6 +50,4 @@ for k = row1 - 1 : -1 : 1
     X(k, 1) = (C(k, col1 + 1) - subsum) / C(k, k);
 end
 
-'The result vector X is:'
-X
 % toc % end timing

@@ -11,16 +11,17 @@ end
 
 for counter = 1 : times
 
-    temp = dot(p, A * p);
+    temp1 = dot(p, A * p);
+    temp2 = dot(r, r);
 
-    if temp == 0
+    if temp1 == 0 || temp2 == 0
         break;
     end
 
-    a = dot(r, r) / temp;
+    a = temp2 / temp1;
     X = X + a * p;
     tempr = r - a * A * p;
-    Beta = dot(tempr, tempr) / dot(r, r);
+    Beta = dot(tempr, tempr) / temp2;
     r = tempr;
     p = r + Beta * p;
 end

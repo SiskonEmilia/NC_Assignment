@@ -3,7 +3,7 @@ format long
 
 oriX = x0;
 [row, col] = size(A);
-X = ones(row, 1);
+X = x0;
 
 for counter = 1 : times
     for indexR = 1 : row
